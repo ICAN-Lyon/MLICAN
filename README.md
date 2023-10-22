@@ -15,7 +15,7 @@ third step : use the function .head() on data to have an overview of the first r
 
 fourth step : import seaborn as sb
 
-fifth step : use the fonction scatterplot() on data to draw a graphic of the relation between fahrenheit and celsius values. *scatterplot function take multiples parameters.
+fifth step : call the fonction scatterplot() on sb to draw a graphic of the relation between fahrenheit and celsius values. *scatterplot function take multiples parameters.
 first parameter should have this pattern [x="celsius], second one [y="fahrenheit"], third one data=data the second data is the name of the function which reads the csv.file
 
 Tips use hue="fahrenheit" as fourth parameter to colorize points depending on the fahrenheit values. 
