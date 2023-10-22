@@ -71,3 +71,8 @@ The fact that our graphic is a linear function, it have a perfect relation, the 
 You can check the model score like this  :
 model.score(x_processed,y_processed)
 This will show a number between 0 and 1.
+
+OK, fine now practices, collects enough data to have 3 csv with one caracteristic and a label on each one, then train a model to predict labels.
+Then print the score of your model. 
+Example do it for a relation between height and weight. Find to more dataset  models. 
+Then publish it on your repository with the "databases"
