@@ -74,5 +74,6 @@ This will show a number between 0 and 1.
 
 OK, fine now practices, collects enough data to have 3 csv with one caracteristic and a label on each one, then train a model to predict labels.
 Then print the score of your model. 
-Example do it for a relation between height and weight. Find to more dataset  models. 
+Create a linear regression model to predict weight.
+Then create two more linear regression models
 Then publish it on your repository with the "databases"
