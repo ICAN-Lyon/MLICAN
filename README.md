@@ -47,7 +47,7 @@ into y_processed
 
 step 7 : we are going to create our model and for that we are going to use from sklearn.linear
 
-import sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LinearRegression
 assign the function LinearRegression into a model variable
 model = LinearRegression()
 Be aware that our model cant be use yet, because he wasnt trained yet !
