@@ -2,7 +2,7 @@
 Introduction to Machine Learning IA Design Week ICAN
 
 
-### TODO Create your first model
+###  EX 01 TODO Create your first model
 To create a notebook in python use the extension .ipynb
 Nothing is require in Google Colab
 
@@ -15,7 +15,7 @@ third step : use the function .head() on data to have an overview of the first r
 
 fourth step : import seaborn as sb
 
-fifth step : call the fonction scatterplot() on sb to draw a graphic of the relation between fahrenheit and celsius values. *scatterplot function take multiples parameters.
+fifth step : use the fonction scatterplot() on data to draw a graphic of the relation between fahrenheit and celsius values. *scatterplot function take multiples parameters.
 first parameter should have this pattern [x="celsius], second one [y="fahrenheit"], third one data=data the second data is the name of the function which reads the csv.file
 
 Tips use hue="fahrenheit" as fourth parameter to colorize points depending on the fahrenheit values. 
@@ -47,7 +47,7 @@ into y_processed
 
 step 7 : we are going to create our model and for that we are going to use from sklearn.linear
 
-from sklearn.linear_model import LinearRegression
+import sklearn.linear_model import LinearRegression
 assign the function LinearRegression into a model variable
 model = LinearRegression()
 Be aware that our model cant be use yet, because he wasnt trained yet !
@@ -72,8 +72,55 @@ You can check the model score like this  :
 model.score(x_processed,y_processed)
 This will show a number between 0 and 1.
 
-OK, fine now practices, collects enough data to have 3 csv with one caracteristic and a label on each one, then train a model to predict labels.
-Then print the score of your model. 
-Create a linear regression model to predict weight.
-Then create two more linear regression models
-Then publish it on your repository with the "databases"
+###  EX 02 CALIFORNIA HOUSING PRICES
+[this is an external link to kaggle.com][https://www.kaggle.com/datasets/camnugent/california-housing-prices]
+
+##TODO 
+
+import the csv and read it
+
+import pandas as pd
+then
+data = pd.read_csv("housing.csv")
+use the function head on data
+
+print data["ocean_proximity"] 
+Houston we have a problem !
+Let's fix it 
+data["ocean_proximity"].value_counts()
+
+Then you will see all the diferent data with their number count.
+However, machine learning models cannot simply take this data and process it ...
+Therefore, later we will have to transform this column into numeric data.
+
+Well, have a look at our data using data.info()
+You will see how much non-empty data comes and the type of data
+You will see that total_bedrooms have 200 empty data.
+Either we fill the 200 missing or drop it.
+
+use data.decribe()
+To have more information about our data.
+count is the number of records,
+mean the average
+The percent value are the sorted ascending values. 
+For example at 25% the median_income is  25 000. 
+
+A graph is more explanatory than records
+draw a graph with hist()
+data.hist()
+Fix the result using data.hist(figsize=(15,8), bins=30, edgecolor="black")
+Check the documentation of seaborn and pandas if you want more parameters.
+
+Keep going
+import seaborn as sb
+then draw a scatterplot with the latitude and longitude
+sb.scatterplot(x="latitude",y="longitude", data=data)
+
+Then you will see a cloudpoints. At first glance, you may not recognize
+something. But remember theses are latitude points and longitude points.
+So it is a map of California ! 
+
+Make the hue parameter taking the median_house_value
+hue="median_house_value"
+palette="coolwarm" 
+Then analyse again or data, what do you see. 
