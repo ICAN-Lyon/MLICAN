@@ -204,5 +204,8 @@ Okay lets fix it
 sb.set(rc={"figure.figsize : (15,8)})
 sb.heatmap(data_na.corr(), annot=True, cmap="YlGnBu")
 
+if you want to focus on a specific label, use this formula to see the correlation between the others labels
+data.corr()["median_house_value].sort_values(ascending=False)
+
 Important notice, this is not magic number, but a reading of the documentation.
 Reading manuals, documentation is part of the software engineer path. It is OVERPOWERED OVER 9000 !!!!
