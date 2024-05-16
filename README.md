@@ -211,3 +211,162 @@ Important notice, this is not magic number, but a reading of the documentation.
 Reading manuals, documentation is part of the software engineer path. It is OVERPOWERED OVER 9000 !!!!
 
 ###  EX 03 Titanic
+https://www.kaggle.com/c/titanic/data?select=train.csv
+
+Let's start with the same routine, we had previously. 
+import pandas, set the alias, and read the file, and show the first items.
+
+import pandas as pd
+data = pd.read_csv("train.csv")
+data.head()
+
+Well, lets analyse our dataset, we can say, that many column wont be relevant to our dataset, and it could possibly go wrong using these kind of data. 
+Name, won't be relevant, same as cabin and Ticket and passengerID. Because they might be contained in others data, like gender, or fare or class. Ill give you an quick explanation IRL. 
+Check the categories in Kaggle if you dont understand a column. 
+
+use data.describe()
+import seaborn and try to figure out how many survived. 
+
+import seaborn as sb
+sb.countplot(x="Survived")
+Now you can see two columns, try to show another graphic representation, with genders.
+
+sb.countplot(x='Survived',data =data, hue="Sex")
+
+Now you have the graphic showing how many males and females survived and died in the Titanic.
+
+Use .isna() to see if we have void values. 
+then use .sum() to see a better result. 
+
+data.isna().sum()
+We have a little problem, as we can see cabin is irrelevant, and a lot of data is missing, age too, and embarked a fewer. We might use a mean in age values. 
+
+Let's try to show a graphic with the ages of passengers. 
+sb.displot(x="Age",data=data)
+
+Lets try to fir our record of 177 void data, with the median age of passengers. 
+data["Age"]
+
+this will show a list of records.
+As we can see some are Nan, 
+
+Lets calculate the mean
+data["Age"].mean()
+
+Remember when we used dropna function, well there is one function to fill too.
+so we want to fill our void records with the mean age calculated below. 
+
+data["Age"].fillna(data["Age"].mean())
+lets assign this into our new variable
+data["Age"] = data["Age"].fillna(data["Age"].mean())
+
+Lets check if this worked, 
+
+data.isna().sum()
+All fine. 
+
+Lets drop the cabin. 
+data = data.drop(["Cabin"], axis=1)
+
+let see our other values, that we wanted to change, 
+
+data["Embarked"].value_counts()
+
+time to clean 
+
+data = data.dropna()
+data.isna().sum()
+
+Perfect. But
+Lets drop the name, passengerd and tickets
+
+data = data.drop(["Name", "PassengerId", "Ticket"], axis =1)
+
+confirm the drop, by using the command, 
+
+data.head()
+You wont see our tree beloved columns. 
+But remember ML algorithm always try to make relation and give weight to numeric data like Numbers. the more data we have as number, the better the relation would be and be give by the algorithm. 
+We can convert Sex gender to numeric values. 0 for Woman, 1 for Male. Yeah Data can be sometimes gendered racist. 
+
+Lets use our old friends, the dummies 
+pd.get_dummies(data["Sex"])
+
+Lets drop the first column, we only need one. 
+
+pd.get_dummies(data["Sex"], drop_first=True)
+Why do we drop the first column ? In fact we want to avoid a more complex problem that we call "Multicollinearity", this would had made troubles in our dataset and predictions, because, the algorithm would had try to make a relation between male and female and their values. 
+And we do not want to. 
+
+Lets our filtered column into a new variable. 
+
+dummies_sex = pd.get_dummies(data["Sex"], drop_first=True)
+
+then join it to our data 
+
+data = data.join(dummies_sex)
+drop the old column 
+data = data.drop(["Sex"], axis=1)
+
+Lets try to clean the Embarked colums the same way we did for Sex. 
+
+dummies_embarked = pd.get_dummies(data["Embarked"], drop_first=True)
+data = data.join(dummies_embarked)
+data = data.drop(["Embarked"],axis=1)
+
+Let's see the correlation between our data.
+
+sb.heatmap(data.corr(),annot=True,cmap="YlGnBu")
+Try to understand, if you dont and need another graphic try our countplot
+
+sb.countplot(x="Survived", data=data, hue="Pclass")
+Lets try to train our data 
+
+X = data.drop(["Survived"], axis=1)
+y = data["Survived"]
+
+from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(X,y, test_size=0.2)
+
+from sklearn.linear_model import LogisticRegression
+
+model = LogisticRegression(max_iter=1000)
+model.fit(X_train, y_train)
+
+Lets try some prediction
+
+prediction = model.predict(X_test)
+
+from sklearn.metrics import accuracy_score
+accuracy_score(y_test, prediction)
+
+The result here could be problematic, because our dataset is not perfect and unbalanced, the reason is that we do not have the same number of passengers that died and survived. Many died, and few survived
+We can adjust this accuracy by adding some classification. 
+
+from sklearn.metrics import classification_report
+
+print(classification_report(y_test,prediction))
+check the documentation if you need a better understanding. 
+
+Let import a confusion matrix, this would compare when our prediction failed compared to reality
+
+from sklearn.metrics import confusion_matrix
+
+confusion_matrix(y_test, prediction)
+this give an array use panda 
+
+pd.DataFrame(confusion_matrix(y_test, prediction),columns=["Pred: No", "Pred: Yes"], index=["Real: No", "Real: Yes"])
+pd.DataFrame(confusion_matrix(y_test, prediction),columns=["Pred: No", "Pred: Yes"], index=["Real: No", "Real: Yes"])
+
+X.head()
+new_passenger = [3,50,0,0,100,False,False,False]
+
+
+
+prediction = model.predict([new_passenger])
+if prediction[0] ==1 :
+  print("You survived")
+else : 
+  print("You died")
+
