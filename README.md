@@ -21,6 +21,7 @@ first parameter should have this pattern [x="celsius], second one [y="fahrenheit
 Tips use hue="fahrenheit" as fourth parameter to colorize points depending on the fahrenheit values. 
 
 Tips you can also change the color palette like this as a fifth parameter palette="coolwarm"
+sb.scatterplot(x="celsius",y="fahrenheit",data=data, hue="fahrenheit",palette="coolwarm")
 
 step 6 : You need to separate the caracteristics and the labels. 
 caracteristics are on the x axis the celsius value, and your labels are 
