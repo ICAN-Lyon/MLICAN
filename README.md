@@ -1,3 +1,7 @@
+# Lien diapos    
+[https://docs.google.com/presentation/d/1yTdOoxVY2dmHiRXncsHrKwKW78IYJwBfHWi2-tx0IIM/edit?usp=sharing]
+
+
 # MLICAN
 Introduction to Machine Learning IA Design Week ICAN
 
